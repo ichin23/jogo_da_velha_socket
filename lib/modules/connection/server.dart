@@ -50,8 +50,7 @@ class ServerJogo {
     client.listen((Uint8List data) {
       final response = String.fromCharCodes(data).trim();
       print('Resposta do servidor: $response');
-      print(identical(response, "restart"));
-      if (identical(response, "restart")) {
+      if (response == "restart") {
         GetIt.I.get<JogoController>().resetJogo();
         return;
       }
