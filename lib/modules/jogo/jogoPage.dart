@@ -193,8 +193,12 @@ class _JogoPageState extends State<JogoPage> {
                                           child: Text(
                                               winner == JogadorType.cliente
                                                   ? "O venceu"
-                                                  : "X venceu",
-                                              style: TextStyle(fontSize: 28)),
+                                                  : winner ==
+                                                          JogadorType.servidor
+                                                      ? "X venceu"
+                                                      : "Deu velha!",
+                                              style: const TextStyle(
+                                                  fontSize: 28)),
                                         ),
                                         IconButton(
                                             onPressed: () {

@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:jogo_da_velha/modules/connection/client.dart';
 import 'package:jogo_da_velha/modules/connection/server.dart';
 
-enum JogadorType { cliente, servidor }
+enum JogadorType { cliente, servidor, velha }
 
 enum JogoStatus { rodando, parado }
 
@@ -38,7 +38,10 @@ class JogoController {
 
     matrizJogo.value = List.from(matrizJogo.value)..[x] = jogador.index;
     if (_checkWinner()) {
-      winner.value = jogador;
+      
+      if (winner.value!=JogadorType.velha) {
+        winner.value = jogador;
+      }
     }
     vez.value = vez.value == JogadorType.cliente
         ? JogadorType.servidor
@@ -87,6 +90,10 @@ class JogoController {
         return true;
       }
     }
+    if (!matrizJogo.value.contains(null)) {
+    winner.value = JogadorType.velha; // Indica empate
+    return true;
+  }
     return false;
   }
 
